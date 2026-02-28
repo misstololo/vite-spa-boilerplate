@@ -97,6 +97,31 @@ body {
   margin-left: 28px;
 }
 
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.28);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 980px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  margin-left: 20px;
+  font-family: var(--font);
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.lang-btn:hover {
+  background: rgba(167, 139, 250, 0.22);
+  border-color: rgba(167, 139, 250, 0.55);
+  color: #fff;
+}
+
 /* ─── HERO ────────────────────────────────────────── */
 .hero {
   position: relative;
@@ -732,6 +757,49 @@ body {
 .rd4 { transition-delay: 0.4s; }
 .rd5 { transition-delay: 0.5s; }
 .rd6 { transition-delay: 0.6s; }
+
+/* ─── RTL / HEBREW ───────────────────────────────── */
+[dir="rtl"] body {
+  font-family: 'Heebo', 'Arial Hebrew', sans-serif;
+}
+
+[dir="rtl"] .btn {
+  font-family: 'Heebo', 'Arial Hebrew', sans-serif;
+}
+
+[dir="rtl"] .hero-title,
+[dir="rtl"] .section-title,
+[dir="rtl"] .cta-title {
+  font-family: 'Frank Ruhl Libre', 'Arial Hebrew', serif;
+  letter-spacing: -1px;
+}
+
+[dir="rtl"] .hero-title    { letter-spacing: -2px; }
+[dir="rtl"] .cta-title     { letter-spacing: -1.5px; }
+[dir="rtl"] .hero-eyebrow  { letter-spacing: 0; }
+[dir="rtl"] .section-label { letter-spacing: 0.04em; }
+
+[dir="rtl"] .hero-subtitle,
+[dir="rtl"] .section-subtitle,
+[dir="rtl"] .feature-card-title,
+[dir="rtl"] .feature-card-desc,
+[dir="rtl"] .dream-card-title,
+[dir="rtl"] .dream-card-desc,
+[dir="rtl"] .step-title,
+[dir="rtl"] .step-desc,
+[dir="rtl"] .cta-subtitle,
+[dir="rtl"] .footer-copy,
+[dir="rtl"] .nav-links a {
+  letter-spacing: 0;
+}
+
+/* Nav direction fixes */
+[dir="rtl"] .nav-logo { margin-right: 0; margin-left: auto; }
+[dir="rtl"] .nav-cta  { margin-left: 0; margin-right: 28px; }
+[dir="rtl"] .lang-btn { margin-left: 0; margin-right: 20px; }
+
+/* Book icon origin flip for RTL */
+[dir="rtl"] .icon-anim-book svg { transform-origin: bottom right; }
 
 /* ─── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 768px) {
