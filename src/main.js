@@ -19,12 +19,12 @@ const ic = {
 
 // ─── FEATURE CARDS ───────────────────────────────────────────────────────────
 const features = [
-  { icon: ic.wave,    title: 'Dream Recording',    desc: 'Capture every detail of your dreams automatically while you sleep. Nothing is lost to the fog of morning.' },
-  { icon: ic.sparkle, title: 'AI Interpretation',  desc: 'Advanced AI analyzes thousands of dream symbols, emotions, and patterns to give you deeply personal insights.' },
-  { icon: ic.chart,   title: 'Pattern Recognition',desc: 'Track recurring themes, symbols, and feelings across weeks to reveal what your subconscious is trying to say.' },
-  { icon: ic.bed,     title: 'Sleep Analysis',     desc: 'Monitor your REM cycles and correlate sleep stages with dream intensity and clarity for deeper understanding.' },
-  { icon: ic.book,    title: 'Dream Journal',      desc: 'A beautiful, searchable journal that organizes all your dream experiences with AI-generated summaries and art.' },
-  { icon: ic.globe,   title: 'Dream Community',    desc: 'Explore shared dreams from around the world. Find comfort and wonder in the collective human dreamscape.' },
+  { icon: ic.wave,    anim: 'wave',    title: 'Dream Recording',    desc: 'Capture every detail of your dreams automatically while you sleep. Nothing is lost to the fog of morning.' },
+  { icon: ic.sparkle, anim: 'sparkle', title: 'AI Interpretation',  desc: 'Advanced AI analyzes thousands of dream symbols, emotions, and patterns to give you deeply personal insights.' },
+  { icon: ic.chart,   anim: 'chart',   title: 'Pattern Recognition',desc: 'Track recurring themes, symbols, and feelings across weeks to reveal what your subconscious is trying to say.' },
+  { icon: ic.bed,     anim: 'bed',     title: 'Sleep Analysis',     desc: 'Monitor your REM cycles and correlate sleep stages with dream intensity and clarity for deeper understanding.' },
+  { icon: ic.book,    anim: 'book',    title: 'Dream Journal',      desc: 'A beautiful, searchable journal that organizes all your dream experiences with AI-generated summaries and art.' },
+  { icon: ic.globe,   anim: 'globe',   title: 'Dream Community',    desc: 'Explore shared dreams from around the world. Find comfort and wonder in the collective human dreamscape.' },
 ]
 
 const featuresHTML = features.map(f => `
@@ -219,7 +219,7 @@ document.getElementById('app').innerHTML = `
     <div class="features-grid">
       ${features.map((f, i) => `
         <div class="feature-card reveal rd${i + 1}">
-          <div class="feature-icon">${f.icon}</div>
+          <div class="feature-icon icon-anim-${f.anim}">${f.icon}</div>
           <h3 class="feature-card-title">${f.title}</h3>
           <p class="feature-card-desc">${f.desc}</p>
         </div>`).join('')}
