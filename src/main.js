@@ -326,13 +326,19 @@ function initStars() {
   }
 
   function spawnStars() {
-    stars = Array.from({ length: 220 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      r: Math.random() * 1.4 + 0.2,
-      phase: Math.random() * Math.PI * 2,
-      speed: Math.random() * 0.006 + 0.002,
-    }))
+    stars = Array.from({ length: 220 }, () => {
+      const bright = Math.random() < 0.15
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: bright ? Math.random() * 1.6 + 0.9 : Math.random() * 1.2 + 0.2,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.008 + 0.003,
+        vx: (Math.random() - 0.5) * 0.07,
+        vy: (Math.random() - 0.5) * 0.04,
+        bright,
+      }
+    })
   }
 
   function draw() {
@@ -355,11 +361,31 @@ function initStars() {
 
     stars.forEach(s => {
       s.phase += s.speed
+      s.x += s.vx
+      s.y += s.vy
+      if (s.x < -2) s.x = width + 2
+      if (s.x > width + 2) s.x = -2
+      if (s.y < -2) s.y = height + 2
+      if (s.y > height + 2) s.y = -2
+
       const alpha = 0.25 + 0.75 * (0.5 + 0.5 * Math.sin(s.phase))
+
+      if (s.bright) {
+        ctx.shadowBlur = 10
+        ctx.shadowColor = `rgba(210,190,255,${alpha * 0.9})`
+      }
+
       ctx.beginPath()
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(255,255,255,${alpha})`
+      ctx.fillStyle = s.bright
+        ? `rgba(235,225,255,${alpha})`
+        : `rgba(255,255,255,${alpha})`
       ctx.fill()
+
+      if (s.bright) {
+        ctx.shadowBlur = 0
+        ctx.shadowColor = 'transparent'
+      }
     })
 
     animId = requestAnimationFrame(draw)
