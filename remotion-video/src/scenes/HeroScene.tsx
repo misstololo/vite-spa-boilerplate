@@ -1,8 +1,10 @@
 import React from "react";
 import {
   AbsoluteFill,
+  Img,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
@@ -15,30 +17,34 @@ export const HeroScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const eyebrowOpacity = interpolate(frame, [0, 1 * fps], [0, 1], {
+  const logoProgress = spring({ frame, fps, config: { damping: 200 } });
+  const logoY = interpolate(logoProgress, [0, 1], [-20, 0]);
+
+  const eyebrowOpacity = interpolate(frame, [0.5 * fps, 1.2 * fps], [0, 1], {
+    extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
-  const line1Scale = spring({ frame: frame - 0.5 * fps, fps, config: { damping: 200 } });
-  const line2Scale = spring({ frame: frame - 1 * fps, fps, config: { damping: 200 } });
-  const line3Scale = spring({ frame: frame - 1.5 * fps, fps, config: { damping: 200 } });
+  const line1Scale = spring({ frame: frame - 0.8 * fps, fps, config: { damping: 200 } });
+  const line2Scale = spring({ frame: frame - 1.2 * fps, fps, config: { damping: 200 } });
+  const line3Scale = spring({ frame: frame - 1.6 * fps, fps, config: { damping: 200 } });
 
   const subtitleOpacity = interpolate(
     frame,
-    [2 * fps, 3 * fps],
+    [2.2 * fps, 3 * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const subtitleY = interpolate(
     frame,
-    [2 * fps, 3 * fps],
+    [2.2 * fps, 3 * fps],
     [20, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
   const ctaOpacity = interpolate(
     frame,
-    [3 * fps, 4 * fps],
+    [3.2 * fps, 4 * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
@@ -82,17 +88,36 @@ export const HeroScene: React.FC = () => {
           gap: 0,
         }}
       >
+        {/* Logo */}
+        <div
+          style={{
+            opacity: logoProgress,
+            transform: `translateY(${logoY}px)`,
+            marginBottom: 48,
+          }}
+        >
+          <Img
+            src={staticFile("logo.png")}
+            style={{
+              width: 340,
+              height: "auto",
+              filter: "invert(1)",
+              mixBlendMode: "screen",
+            }}
+          />
+        </div>
+
         {/* Eyebrow */}
         <p
           style={{
             fontFamily: FONT,
-            fontSize: 22,
+            fontSize: 18,
             fontWeight: 500,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             color: "#a78bfa",
             opacity: eyebrowOpacity,
-            margin: "0 0 40px 0",
+            margin: "0 0 32px 0",
           }}
         >
           Introducing DreamSense
@@ -102,7 +127,7 @@ export const HeroScene: React.FC = () => {
         <div
           style={{
             fontFamily: FONT,
-            fontSize: 120,
+            fontSize: 112,
             fontWeight: 700,
             letterSpacing: "-0.04em",
             lineHeight: 1.0,
@@ -134,13 +159,13 @@ export const HeroScene: React.FC = () => {
         <p
           style={{
             fontFamily: FONT,
-            fontSize: 24,
+            fontSize: 22,
             fontWeight: 400,
             color: "rgba(255,255,255,0.65)",
             textAlign: "center",
             maxWidth: 680,
             lineHeight: 1.6,
-            margin: "48px 0 0 0",
+            margin: "40px 0 0 0",
             opacity: subtitleOpacity,
             transform: `translateY(${subtitleY}px)`,
           }}
@@ -152,7 +177,7 @@ export const HeroScene: React.FC = () => {
         {/* CTA */}
         <div
           style={{
-            marginTop: 52,
+            marginTop: 44,
             opacity: ctaOpacity,
             display: "flex",
             gap: 20,
