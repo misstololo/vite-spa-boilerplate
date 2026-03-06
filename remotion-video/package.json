@@ -1,0 +1,26 @@
+{
+  "name": "remotion-video",
+  "version": "1.0.0",
+  "description": "DreamSense product video",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx remotion studio",
+    "render": "npx remotion render DreamSense out/dreamsense.mp4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@remotion/cli": "^4.0.434",
+    "@remotion/transitions": "^4.0.434",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "remotion": "^4.0.434"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
+  }
+}
